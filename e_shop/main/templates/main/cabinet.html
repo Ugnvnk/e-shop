@@ -1,9 +1,10 @@
 {% extends 'main/layout.html' %}
 {% load static %}
 
-
+{% block sidebar %}
+{% endblock %}
 {% block content %}
-<div class="wrapper">
+
 <a href="{% url 'logout' %}">Logout</a>
-</div>
+
 {% endblock%}

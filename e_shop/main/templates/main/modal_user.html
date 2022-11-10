@@ -2,6 +2,7 @@
 {% load static  %}
 {% load socialaccount %}
 <div class="modal fade" id="modal_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content form_content">
             <div class="modal-header">
@@ -35,4 +36,38 @@
 
         </div>
     </div>
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content form_content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Enter</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-row">
+            <div class="container border-end reg" >
+                <div class="alert alert-danger d-none" role="alert"></div>
+                <form action="{% url 'login_modal' %}" method="POST" id="login_form">
+                    {% csrf_token %}
+                    {{ login_ajax }}
+
+                <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+                <button type="submit" class="btn btn-success w-100">Login</button>
+                </form>
+
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modal_register">
+                    Зарегистрироваться
+                </a>
+
+            </div>
+
+            <div class="container social-reg">
+                <a href="{% provider_login_url 'google' %}"><i class="fa-brands fa-google"></i></a>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>

@@ -1,10 +1,14 @@
+
 from allauth.account.views import LoginView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.views import View
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from .forms import UserCreationForm, MySetPasswordForm
+from django.http import JsonResponse, HttpResponseRedirect
+from django.views.generic import FormView, ListView
+
+from .forms import UserCreationForm, MySetPasswordForm, ProductInput
+from .models import Category
 
 
 class MyLoginView(View):
@@ -51,3 +55,57 @@ class Register(View):
 
 class SocialLoginView(LoginView):
     pass
+
+from django.shortcuts import render
+
+
+def main(request):
+    cats = Category.objects.filter(parent=None)
+
+    context = {'cats': cats, 'cat_selected': 0}
+
+    return render(request, "main/main.html", context = context )
+
+
+class ShowCategory(ListView):
+
+
+    model = Category
+    template_name = "main/show_category.html"
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['cat'] = Category.objects.get(slug=self.kwargs['cat_slug'])
+        context['cats'] = Category.objects.filter(parent=None)
+        context['cat_selected'] = context['cat'].pk
+        context['children'] = context['cat'].category_set.all()
+
+
+
+
+        return context
+
+
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProductInput(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProductInput()
+
+    return render(request, 'main/product_form.html', {'form': form})
+
+
+
+
