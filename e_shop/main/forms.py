@@ -3,6 +3,8 @@ from django.contrib.auth.forms import (UserCreationForm as UserCreationFormDjang
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from main.models import Product
+
 User = get_user_model()
 
 
@@ -53,3 +55,8 @@ class AuthenticationAjaxForm(forms.Form):
             }
         ),
     )
+
+class ProductInput(forms.Form):
+        model = Product
+        fields = ['name', 'category', 'brand', 'photo', 'price']
+

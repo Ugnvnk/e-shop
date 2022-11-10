@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'mptt',
+    'django_mptt_admin',
 ]
 
 AUTHENTICATION_BACKENDS = [
