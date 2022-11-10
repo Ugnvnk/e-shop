@@ -1,0 +1,40 @@
+<!-- Modal -->
+{% load static  %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+<div class="modal fade" id="modal_register" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content form_content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Enter</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-row">
+            <div class="container border-end reg" >
+                <div class="alert alert-danger d-none" role="alert"></div>
+                <form action="{% url 'register' %}" method="POST" id="register_form">
+                    {% csrf_token %}
+                    {% for field in registration_form %}
+                    <div class="fieldWrapper">
+                        {{ field|as_crispy_field }}
+                    </div>
+                    {% endfor %}
+
+
+                <button type="submit" class="btn btn-success w-100">Login</button>
+                </form>
+
+
+
+            </div>
+
+            <div class="container social-reg">
+                <a href="#">text</a>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
