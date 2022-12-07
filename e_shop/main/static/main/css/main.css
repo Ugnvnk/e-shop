@@ -23,6 +23,7 @@ a:hover {
 
 }
 
+}
 
 .top-menu li a::after {
     content: '';
@@ -67,7 +68,14 @@ a:hover {
 
 /* carousel */
 
-
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    flex: 1;
+}
 
 /* product card */
 .product-card {
@@ -157,6 +165,8 @@ a:hover {
 /* footer */
 .footer {
     background-color: #343434;
+
+
 }
 .footer h4 {
     color: #ccc;
