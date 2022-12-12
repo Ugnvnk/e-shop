@@ -1,0 +1,19 @@
+# created by virtualenv automatically
+.idea/
+.vscode/
+.venv/
+__pycache__/
+
+
+local.py
+prod.py
+
+*.log
+*.pot
+*.py[cod]
+
+media/**
+!media/
+!media/.gitkeep
+/e_shop/media/
+
